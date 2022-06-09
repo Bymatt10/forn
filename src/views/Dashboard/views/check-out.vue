@@ -52,7 +52,7 @@
                   </div>
                 </td>
                 <th>{{ item.cantPersonas }}</th>
-               <td>
+                <td>
                   <div v-if="item.estado == 1">Espera</div>
                   <div v-if="item.estado == 2">Rechazada</div>
                   <div v-if="item.estado == 3">probada</div>
@@ -78,8 +78,8 @@
                         <!-- a -->
 
 
-                        <v-btn class="mx-2" v-if="item.estado == 1" @click="RecuperarReservas(item.idreserva)" fab
-                          dark small color="yellow">
+                        <v-btn class="mx-2" v-if="item.estado == 1" @click="RecuperarReservas(item.idreserva)" fab dark
+                          small color="yellow">
                           <v-icon dark>
                             mdi-minus-circle
                           </v-icon>
@@ -278,7 +278,7 @@ export default {
       console.log(this.natural);
       console.log(this.password);
       await axios
-        .post("http://localhost:3000/entidad/create/", this.natural)
+        .post("https://dlido.herokuapp.com/entidad/create/", this.natural)
         .then((resp) => {
           if (resp.status == 201) {
             this.respuesta = resp.data
@@ -295,7 +295,7 @@ export default {
     }, Pais: async function () {
       console.log('Hola');
       await axios
-        .get('http://localhost:3000/pais')
+        .get('https://dlido.herokuapp.com/pais')
         .then((resp) => {
           if (resp.status == 200) {
             for (let index = 0; index < resp.data.length; index++) {
@@ -312,7 +312,7 @@ export default {
     Ciudad: async function () {
       console.log('Hola');
       await axios
-        .get('http://localhost:3000/ciudad')
+        .get('https://dlido.herokuapp.com/ciudad')
         .then((resp) => {
           if (resp.status == 200) {
             this.ciudad = resp.data
@@ -323,7 +323,7 @@ export default {
     TipoEntidad: async function () {
       console.log('Hola');
       await axios
-        .get('http://localhost:3000/tipoentidad')
+        .get('https://dlido.herokuapp.com/tipoentidad')
         .then((resp) => {
           if (resp.status == 200) {
             this.tipoentidad = resp.data
@@ -334,7 +334,7 @@ export default {
     ActividadJuridica: async function () {
       console.log('Hola');
       await axios
-        .get('http://localhost:3000/actividadJuridica')
+        .get('https://dlido.herokuapp.com/actividadJuridica')
         .then((resp) => {
           if (resp.status == 200) {
             this.actividadjurid = resp.data
@@ -348,14 +348,14 @@ export default {
       let Aidi = parseInt(id)
       let estado = { estado: 'Ocupada' };
       
-      await axios.put("http://localhost:3000/habitaciones/cambiarEstado/" + Aidi, estado).then((resp) => {
+      await axios.put("https://dlido.herokuapp.com/habitaciones/cambiarEstado/" + Aidi, estado).then((resp) => {
         if (resp.status == 204) {
           this.obtenerHabitaciones();
         }
       });
     },
     obtenerTipoHabitaciones: async function () {
-      await axios.get("http://localhost:3000/categoriaHab").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/categoriaHab").then((resp) => {
         if (resp.status == 200) {
           this.categoriaHabitacion = resp.data;
         }
@@ -363,7 +363,7 @@ export default {
     },
 
     obtenerHabitaciones: async function () {
-      await axios.get("http://localhost:3000/habitaciones/obtener").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/habitaciones/obtener").then((resp) => {
         if (resp.status == 200) {
           this.habitacionesVisualizar = resp.data;
           this.obtenerTipoHabitaciones()
@@ -373,7 +373,7 @@ export default {
     },
 
     obtenerEquipamiento: async function () {
-      await axios.get("http://localhost:3000/equipamiento").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/equipamiento").then((resp) => {
         if (resp.status == 200) {
           this.equipamientoVisualizar = resp.data;
         }
@@ -384,7 +384,7 @@ export default {
       let Aidi = parseInt(id)
       let estado = { estado: 4 };
       console.log("Hola");
-      await axios.put("http://localhost:3000/reserva/cambioEstado/" + Aidi, estado).then((resp) => {
+      await axios.put("https://dlido.herokuapp.com/reserva/cambioEstado/" + Aidi, estado).then((resp) => {
         if (resp.status == 204) {
           this.obtenerReservas();
         }
@@ -398,7 +398,7 @@ export default {
       let Aidi = parseInt(id)
       let estado = { estado: 3 };
 
-      await axios.put("http://localhost:3000/reserva/cambioEstado/" + Aidi, estado).then((resp) => {
+      await axios.put("https://dlido.herokuapp.com/reserva/cambioEstado/" + Aidi, estado).then((resp) => {
         if (resp.status == 204) {
           this.obtenerReservas();
         }
@@ -421,7 +421,7 @@ export default {
       }
       this.reservar.cantPersonas = parseInt(this.reservar.cantPersonas)
       console.log("Hola");
-      await axios.post("http://localhost:3000/reserva/create", this.reservar).then((resp) => {
+      await axios.post("https://dlido.herokuapp.com/reserva/create", this.reservar).then((resp) => {
         if (resp.status == 201) {
           alert("Reserva hecha correctamente.");
           location.reload();
@@ -431,7 +431,7 @@ export default {
     },
     obtenerReservas: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/reserva").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/reserva").then((resp) => {
         if (resp.status == 200) {
           this.reservaVisualizar = resp.data;
           this.obtenerUsuarios();
@@ -445,7 +445,7 @@ export default {
 
     obtenerUsuarios: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/usuario").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/usuario").then((resp) => {
         if (resp.status == 200) {
           this.usuariosVisualizar = resp.data;
         }
@@ -454,7 +454,7 @@ export default {
 
     obtenerTipoHabitaciones: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/categoriaHab").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/categoriaHab").then((resp) => {
         if (resp.status == 200) {
           this.categoriaHabitacion = resp.data;
         }
@@ -464,7 +464,7 @@ export default {
 
     obtenerHabitaciones: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/habitaciones/obtener").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/habitaciones/obtener").then((resp) => {
         if (resp.status == 200) {
           this.habitacionesVisualizar = resp.data;
         }
@@ -474,7 +474,7 @@ export default {
 
     obtenerServicios: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/servicios").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/servicios").then((resp) => {
         if (resp.status == 200) {
           this.Servicioshabitacion = resp.data;
         }

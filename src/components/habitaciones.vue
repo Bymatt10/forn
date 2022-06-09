@@ -13,8 +13,8 @@
       <v-col sm="12" md="3" v-for="(item, i) in habitacion" :key="i">
         <!-- Nueva card -->
 
-       <v-card class="fill-height ma-0" max-width="344" id="top">
-          <v-img :src="item.img" width="300px" height="200px" style ="object-fit: scale-down"></v-img>
+        <v-card class="fill-height ma-0" max-width="344" id="top">
+          <v-img :src="item.img" width="300px" height="200px" style="object-fit: scale-down"></v-img>
 
           <v-card-title style="font-size: 17px">
             Habitacion: {{ item.nombre }}
@@ -185,7 +185,7 @@ export default {
       console.log(this.numero);
       if (this.numero !== 0) {
         await axios
-          .get("http://localhost:3000/habitaciones/" + this.numero)
+          .get("https://dlido.herokuapp.com/habitaciones/" + this.numero)
           .then((resp) => {
             if (resp.status == 200) {
               this.habitacion = resp.data;
@@ -194,7 +194,7 @@ export default {
             console.log(this.habitacion);
           });
       } else {
-        await axios.get("http://localhost:3000/habitaciones").then((resp) => {
+        await axios.get("https://dlido.herokuapp.com/habitaciones").then((resp) => {
           if (resp.status == 200) {
             this.habitacion = resp.data;
             console.log("todo birn");
@@ -207,7 +207,7 @@ export default {
     equipamientoHab: async function (habitacion) {
       console.log("Id hab: ", habitacion);
       await axios
-        .get("http://localhost:3000/equipamiento/" + habitacion)
+        .get("https://dlido.herokuapp.com/equipamiento/" + habitacion)
         .then((resp) => {
           if (resp.status == 200) {
             this.equipamiento = resp.data;

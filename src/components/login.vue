@@ -75,7 +75,7 @@ export default {
             }
 
             await axios
-                .post("http://localhost:3000/authentication/login", send)
+                .post("https://dlido.herokuapp.com/authentication/login", send)
                 .then((resp) => {
                     if (resp.status == 200) {
                         this.respuesta = "Sesión abierta"
@@ -96,7 +96,7 @@ export default {
         Entidad: async function () {
             console.log('Hola');
             await axios
-                .get('http://localhost:3000/entidad')
+                .get('https://dlido.herokuapp.com/entidad')
                 .then((resp) => {
                     if (resp.status == 200) {
                         for (let index = 0; index < resp.data.length; index++) {
@@ -124,7 +124,7 @@ export default {
 
             let usuario = this.email
             await axios
-                .get('http://localhost:3000/usuario/' + usuario)
+                .get('https://dlido.herokuapp.com/usuario/' + usuario)
                 .then((resp) => {
                     if (resp.status == 200) {
                         let seleccionadoxd = resp.data[0].idUsuario

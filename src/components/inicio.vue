@@ -137,7 +137,7 @@ export default {
         categoriaHabitacion: async function () {
             console.log('Hola');
             await axios
-                .get('http://localhost:3000/categoriaHab')
+                .get('https://dlido.herokuapp.com/categoriaHab')
                 .then((resp) => {
                     if (resp.status == 200) {
                         this.categoriaHab = resp.data

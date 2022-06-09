@@ -26,7 +26,7 @@
         <v-list nav dense>
           <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
 
-            <v-list-item to="reserva" >
+            <v-list-item to="reserva">
               <v-list-item-icon>
                 <v-icon>mdi-bell</v-icon>
               </v-list-item-icon>
@@ -54,14 +54,14 @@
               <v-list-item-title>Habitaciones</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="Usuarios" >
+            <v-list-item to="Usuarios">
               <v-list-item-icon>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-icon>
               <v-list-item-title>Usuarios</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="CrearCuenta" >
+            <v-list-item to="CrearCuenta">
               <v-list-item-icon>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-icon>
@@ -302,7 +302,7 @@ export default {
     },
     obtenerUsuariosRoles: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/usuariorol").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/usuariorol").then((resp) => {
         if (resp.status == 200) {
           for (let index = 0; index < resp.data.length; index++) {
             const element = resp.data[index];
@@ -328,7 +328,7 @@ export default {
       console.log("yooo", this.obtener);
       console.log("Hola");
       await axios
-        .get("http://localhost:3000/entidad/" + this.obtener)
+        .get("https://dlido.herokuapp.com/entidad/" + this.obtener)
         .then((resp) => {
           if (resp.status == 200) {
             let entidad = resp.data;

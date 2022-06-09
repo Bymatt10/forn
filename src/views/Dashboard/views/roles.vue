@@ -1,9 +1,11 @@
 <template>
   <v-container>
     <v-row>
-        <v-col md="6" id="text-title"><h3>Roles</h3></v-col>
+      <v-col md="6" id="text-title">
+        <h3>Roles</h3>
+      </v-col>
 
-        <v-row justify="start">
+      <v-row justify="start">
         <v-dialog v-model="dialogCrear" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
@@ -19,26 +21,12 @@
                 <v-form v-model="validacionCreacion">
                   <v-row no-gutters>
                     <v-col cols="12" sm="6">
-                      <v-select
-                        v-model="create.idUsuario"
-                        :items="usuarios"
-                        item-text="nombre"
-                        item-value="idUsuario"
-                        label="Usuario"
-                        :rules="Rules"
-                        required
-                      ></v-select>
+                      <v-select v-model="create.idUsuario" :items="usuarios" item-text="nombre" item-value="idUsuario"
+                        label="Usuario" :rules="Rules" required></v-select>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-select
-                        v-model="create.idRol"
-                        :items="rol"
-                        item-text="nombreRol"
-                        item-value="idrRol"
-                        label="Roles"
-                        :rules="Rules"
-                        required
-                      ></v-select>
+                      <v-select v-model="create.idRol" :items="rol" item-text="nombreRol" item-value="idrRol"
+                        label="Roles" :rules="Rules" required></v-select>
                     </v-col>
 
                     <!-- <v-col cols="12" sm="6">
@@ -51,12 +39,7 @@
                     </v-col> -->
 
                     <v-col md="3" style="margin-right: 390px">
-                      <v-btn
-                        @click="createRolsUsers()"
-                        :disabled="!validacionCreacion"
-                        class="mr-4"
-                        color="success"
-                      >
+                      <v-btn @click="createRolsUsers()" :disabled="!validacionCreacion" class="mr-4" color="success">
                         Enviar
                       </v-btn>
                     </v-col>
@@ -74,79 +57,65 @@
         </v-dialog>
       </v-row>
       <v-col md="12">
-          <v-simple-table height="600px">
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-left">Nombre Usuario</th>
-              <th class="text-left">Rol</th>
-              <th class="text-left">Estado</th>
-              <th class="text-left">Cliente</th>
-              <th class="text-left">Trabajador</th>
-              <th class="text-left"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, i) in ObtenerUsuarios" :key="i" >
-              <td >
-                <div v-for="(itemUsuario, i) in usuarios" :key="i">
+        <v-simple-table height="600px">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">Nombre Usuario</th>
+                <th class="text-left">Rol</th>
+                <th class="text-left">Estado</th>
+                <th class="text-left">Cliente</th>
+                <th class="text-left">Trabajador</th>
+                <th class="text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, i) in ObtenerUsuarios" :key="i">
+                <td>
+                  <div v-for="(itemUsuario, i) in usuarios" :key="i">
                     <div v-if="itemUsuario.idUsuario == item.idUsuario">
-                        {{itemUsuario.nombre}}
+                      {{itemUsuario.nombre}}
                     </div>
-                </div>
-              </td>
-              <td>
-                <div v-for="(itemRol, i) in rol" :key="i">
+                  </div>
+                </td>
+                <td>
+                  <div v-for="(itemRol, i) in rol" :key="i">
                     <div v-if="itemRol.idrRol == item.idRol">
-                        {{itemRol.nombreRol}}
+                      {{itemRol.nombreRol}}
                     </div>
-                </div>
-              </td>
-              <td>
-                <div v-if="item.estado == true"> Activo</div>
-                <div v-if="item.estado == false"> Inactivo</div>
-              </td>
-              <td>
-                <div v-if="item.cliente == true"> Si</div>
-                <div v-if="item.cliente == false"> No</div>
-              </td>
-              <td>
-                <div v-if="item.trabajador == true"> Si</div>
-                <div v-if="item.trabajador == false"> No</div>
-              </td>
-              <td>
-                  <v-btn
-                        class="mx-2"
-                        v-if="item.estado == true"
-                        @click="stateRolsUsers(item.idUsuarioRol, estadoDesactivado)"
-                        fab
-                        dark
-                        small
-                        color="red"
-                        >
-                        <v-icon dark>
-                            mdi-account-convert
-                        </v-icon>
-                    </v-btn>
+                  </div>
+                </td>
+                <td>
+                  <div v-if="item.estado == true"> Activo</div>
+                  <div v-if="item.estado == false"> Inactivo</div>
+                </td>
+                <td>
+                  <div v-if="item.cliente == true"> Si</div>
+                  <div v-if="item.cliente == false"> No</div>
+                </td>
+                <td>
+                  <div v-if="item.trabajador == true"> Si</div>
+                  <div v-if="item.trabajador == false"> No</div>
+                </td>
+                <td>
+                  <v-btn class="mx-2" v-if="item.estado == true"
+                    @click="stateRolsUsers(item.idUsuarioRol, estadoDesactivado)" fab dark small color="red">
+                    <v-icon dark>
+                      mdi-account-convert
+                    </v-icon>
+                  </v-btn>
 
-                    <v-btn
-                        class="mx-2"
-                        v-if="item.estado == false"
-                        @click="stateRolsUsers(item.idUsuarioRol, estadoActivado)"
-                        fab
-                        dark
-                        small
-                        color="green"
-                        >
-                        <v-icon dark>
-                            mdi-account-convert
-                        </v-icon>
-                    </v-btn>
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
+                  <v-btn class="mx-2" v-if="item.estado == false"
+                    @click="stateRolsUsers(item.idUsuarioRol, estadoActivado)" fab dark small color="green">
+                    <v-icon dark>
+                      mdi-account-convert
+                    </v-icon>
+                  </v-btn>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
       </v-col>
     </v-row>
   </v-container>
@@ -203,7 +172,7 @@ export default {
           let Aidi = parseInt(id)
           let estado = {estado: estadoCambio};
           console.log("Id Reserva: ", Aidi, "Estado: ", estado);
-        await axios.put("http://localhost:3000/usuariorol/cambioEstado/"+Aidi, estado).then((resp) => {
+        await axios.put("https://dlido.herokuapp.com/usuariorol/cambioEstado/"+Aidi, estado).then((resp) => {
             if (resp.status == 204) {
               location.reload();
             }
@@ -212,7 +181,7 @@ export default {
 
     createRolsUsers: async function (){
       await axios
-        .post("http://localhost:3000/usuariorol/create", this.create)
+        .post("https://dlido.herokuapp.com/usuariorol/create", this.create)
         .then((resp) => {
           if (resp.status == 201) {
             alert("EL rol del usuariario fue asignado exitosamente.");
@@ -223,7 +192,7 @@ export default {
 
       obtenerUsuarios: async function () {
         console.log("Hola");
-        await axios.get("http://localhost:3000/usuario").then((resp) => {
+        await axios.get("https://dlido.herokuapp.com/usuario").then((resp) => {
             if (resp.status == 200) {
             this.usuarios = resp.data;
             }
@@ -232,7 +201,7 @@ export default {
 
       obtenerRol: async function () {
         console.log("Hola");
-        await axios.get("http://localhost:3000/rol").then((resp) => {
+        await axios.get("https://dlido.herokuapp.com/rol").then((resp) => {
             if (resp.status == 200) {
             this.rol = resp.data;
             }
@@ -241,7 +210,7 @@ export default {
 
       obtenerUsuariosRoles: async function () {
         console.log("Hola");
-        await axios.get("http://localhost:3000/usuariorol").then((resp) => {
+        await axios.get("https://dlido.herokuapp.com/usuariorol").then((resp) => {
             if (resp.status == 200) {
             this.ObtenerUsuarios = resp.data;
             }
@@ -253,8 +222,8 @@ export default {
 
 
 <style scoped>
-    #text-title{
-        margin-top: 20px;
-        margin-left: 40%;
-    }
+#text-title {
+  margin-top: 20px;
+  margin-left: 40%;
+}
 </style>

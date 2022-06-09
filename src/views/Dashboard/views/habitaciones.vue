@@ -127,14 +127,14 @@ export default {
         alert("Selecciona un estado")
         return 0
       }
-      await axios.put("http://localhost:3000/habitaciones/cambiarEstado/" + Aidi, estado).then((resp) => {
+      await axios.put("https://dlido.herokuapp.com/habitaciones/cambiarEstado/" + Aidi, estado).then((resp) => {
         if (resp.status == 204) {
           this.obtenerHabitaciones();
         }
       });
     },
     obtenerTipoHabitaciones: async function () {
-      await axios.get("http://localhost:3000/categoriaHab").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/categoriaHab").then((resp) => {
         if (resp.status == 200) {
           this.categoriaHabitacion = resp.data;
         }
@@ -142,7 +142,7 @@ export default {
     },
 
     obtenerHabitaciones: async function () {
-      await axios.get("http://localhost:3000/habitaciones/obtener").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/habitaciones/obtener").then((resp) => {
         if (resp.status == 200) {
           this.habitacionesVisualizar = resp.data;
           this.obtenerTipoHabitaciones()
@@ -152,7 +152,7 @@ export default {
     },
 
     obtenerEquipamiento: async function () {
-      await axios.get("http://localhost:3000/equipamiento").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/equipamiento").then((resp) => {
         if (resp.status == 200) {
           this.equipamientoVisualizar = resp.data;
         }

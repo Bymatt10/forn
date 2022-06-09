@@ -146,7 +146,7 @@
 
                     <v-btn icon @click="show = true">
                       <v-icon>{{
-                          show ? "mdi-chevron-up" : "mdi-chevron-down"
+                      show ? "mdi-chevron-up" : "mdi-chevron-down"
                       }}</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -346,7 +346,7 @@ export default {
         alert("Selecciona un estado puto")
         return 0
       }
-      await axios.put("http://localhost:3000/habitaciones/cambiarEstado/" + id, estado).then((resp) => {
+      await axios.put("https://dlido.herokuapp.com/habitaciones/cambiarEstado/" + id, estado).then((resp) => {
         if (resp.status == 204) {
           this.obtenerHabitaciones();
         }
@@ -357,7 +357,7 @@ export default {
       this.pagar.idusuarios = usuario;
       console.log(this.pagar);
       await axios
-        .post("http://localhost:3000/metodoPago/create", this.pagar)
+        .post("https://dlido.herokuapp.com/metodoPago/create", this.pagar)
         .then((resp) => {
           if (resp.status == 201) {
             alert("El pago y la reserva se han hecho exitosamente.");
@@ -379,7 +379,7 @@ export default {
 
     servicioHabitacion: async function () {
       console.log("Hola");
-      await axios.get("http://localhost:3000/servicios").then((resp) => {
+      await axios.get("https://dlido.herokuapp.com/servicios").then((resp) => {
         if (resp.status == 200) {
           this.servicios = resp.data;
         }
@@ -441,7 +441,7 @@ export default {
       let enviarDatosFinales = JSON.parse(enviardatos);
       console.log("Reserva: ", enviarDatosFinales);
       await axios
-        .post("http://localhost:3000/reserva/create", enviarDatosFinales)
+        .post("https://dlido.herokuapp.com/reserva/create", enviarDatosFinales)
         .then((resp) => {
           if (resp.status == 201) {
             this.respuesta = "Sesión abierta";
